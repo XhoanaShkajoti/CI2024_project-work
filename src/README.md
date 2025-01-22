@@ -2,19 +2,21 @@
 # Symbolic Regression using Genetic Programming
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 ![Contributors](https://img.shields.io/badge/Contributors-4-brightgreen)
-![Commits](https://img.shields.io/badge/Commits-28-blue)
 ![Python](https://img.shields.io/badge/python-3.10-blue)
 
-
+## Disclaimer 
+ **I worked in a group with my colleagues, listed down under contributers. The official repositary that contains all the previous work together witht the commits done is [CI2024_Project](https://github.com/FerraiuoloP/CI2024_Project).**
+## Description
 This repository contains an implementation of a Symbolic Regression algorithm, using a tree-based **Genetic Programming** (GP) evolutionary technique. The algorithm evolves mathematical expressions in order to find the model that best fits a given set of data in the form $(X, y)$. By leveraging *selection*, according to a fitness measure, *mutation* and *crossover*, the SR algorithm generates mathematical formulas that are able to capture the complex patterns present in the input data.
 
 ## Key Features
 - **Island Model Genetic Algorithm**
-  - The population is divided into a certain number of **subpopulations** (a.k.a. *islands*) which evolve separately and can occasionaly exchange individuals (a.k.a *migration*) in order to avoid local optima and rapid convergence;
+  - The population is divided into a certain number of **subpopulations** (a.k.a. *islands*) which evolve separately and can probablisticly ,occasionaly exchange individuals (a.k.a *migration*) in order to avoid local optima and rapid convergence;
   - At each migration event, according to a migration rate parameter, one or more individuals migrate from the source island to another random island, as a way to ensure equal chance of genetic mixing across islands.
 - **Tree-Based Representation**
   - The evolutionary algorithm iteratively evolves a population of mathematical formulas, represented as full and grow trees;
   - Internal nodes are randomly chosen from function set (arithmetic, trigonometric, logarithmic and exponential operators), while leaves are randomly chosen from terminal set (constants and variables).
+  - Each tree (individual population) is valid for all variables of the set. When calculating the MSE no invalid mathimatical operation is present 
 - **Elitism**
   - To preserve high-quality solutions, the best individuals (a.k.a. *elites*) are directly inserted into the next generation, without being subjected to any change.
 - **Parents Selection**
@@ -22,6 +24,9 @@ This repository contains an implementation of a Symbolic Regression algorithm, u
 - **Mutation and Crossover**
   - Various mutation mechanisms are implemented. Replaced a subtree with a new one (`mutate_subtree`) or modify a single node (`mutate_single_node`) in the selected parent tree;
   - Combine two different trees for generating new offsprings. This allows the algorithm to explore new regions in the search space, encouraging exploration instead of exploitation.
+- **Other Strategies**
+  - Probabilistic collapsing, collapsing produces equivalent formulas to the one in the beggining , just prunes branches and reduces depth.
+  - Take over detection is applied for when an individual takes over most of the population, the population is trimmed and subsituted with new individuals.   
 
 ## How it works
 - **Initialization**
@@ -50,7 +55,7 @@ The project is organized as follows:
 - `pyproject.toml`
   - The configuration file containing dependencies and metadata for the project. *Poetry* is used for package management.
 
-## Contributing
+## Other Contributers
 <table>
   <tr>
     <td align="center" style="border: none;">
@@ -72,13 +77,6 @@ The project is organized as follows:
         <img src="https://github.com/GDennis01.png" width="50px" style="border-radius: 50%; border: none;" alt=""/>
         <br />
         <sub>GDennis01</sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/XhoanaShkajoti">
-        <img src="https://github.com/XhoanaShkajoti.png" width="50px" style="border-radius: 50%; border: none;" alt=""/>
-        <br />
-        <sub>XhoanaShkajoti</sub>
       </a>
     </td>
   </tr>
