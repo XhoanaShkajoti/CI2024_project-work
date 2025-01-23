@@ -42,7 +42,7 @@ class Node:
             return str(self.value)
         if self.node_type == NodeType.VAR:
             return "x["+self.value[1:]+"]"
-            # return self.value
+            
         if self.node_type == NodeType.U_OP:
             operand = self.right.to_np_formula_rec(use_std_operators) if self.left is None else self.left.to_np_formula_rec(use_std_operators)
             if use_std_operators:
@@ -89,7 +89,7 @@ class Tree:
     def __init__(self, method="full", require_valid_tree=True, empty=False):
         # Valid tree means a tree that has a computable fitness (no division by zero, no overflow, etc.)
         # print(f"--Creating tree with max_depth:{max_depth} and spawn_depth:{spawn_depth}")
-        self.age = 0    # NOTE: it's just a test for select_parents_fitness_age
+        
         self.fitness = np.inf
         self.root = None
         while not empty and self.fitness == np.inf:
@@ -234,7 +234,7 @@ class Tree:
 
 
     def mutate_subtree(self):
-        self.age += 1
+        
 
         variables_tree_tripe,other_nodes_triple = self.collect_nodes(self.root)
         variables_tree=Tree.count_vars(variables_tree_tripe)
@@ -245,7 +245,7 @@ class Tree:
         picked_node_triple=valid_nodes[pick_idx]
         picked_node,picked_depth,_ = picked_node_triple
 
-        # print("Picked node: ",str(picked_node))
+        
 
         #get the variables in the subtree of the picked node and compare them with the variables in the tree
         subtree_vars_triple,_= self.collect_nodes(picked_node,depth=picked_depth)
@@ -255,12 +255,12 @@ class Tree:
         must_include_vars = [k for k,v in diff.items() if v==0]
        
         
-        # res= map(lambda x: variables_tree.remove(x), subtree_vars)
-        # next(res)
+        
+        
     
  
         max_possible_depth = Tree.max_depth - picked_depth
-        # print("Max possible depth: ",max_possible_depth)
+        
  
         
         new_subtree = self.populate_tree_grow_method(max_possible_depth,must_include_vars=must_include_vars)
@@ -279,7 +279,7 @@ class Tree:
 
 
     def mutate_single_node(self, num_mutations=1):
-        self.age += 1
+        
 
         _,nodes_triple = self.collect_nodes(self.root)
         if(len(nodes_triple)==0): #if there are no nodes to mutate but the tree is made only of a variable
@@ -304,7 +304,7 @@ class Tree:
     #2) The resulting trees have a depth <= max_depth
 
     def crossover(self, tree2):
-        # TODO: increment tree age in crossover for select_parents_fitness_age (?)
+        
         new_tree1 = Tree(empty=True)
         new_tree2 = Tree(empty=True)
         new_tree1.root = self.root.clone()
@@ -618,7 +618,7 @@ class Tree:
 
             if len(vars_in_subtree) == 0 and node.node_type != NodeType.CONST:
                 eval_formula = eval(f"lambda x: {node.to_np_formula_rec()}")
-                # print("collapsed")
+                
                 ev = eval_formula(np.zeros(Tree.n_var))
                 
                 node.node_type = NodeType.CONST
