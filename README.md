@@ -66,9 +66,9 @@ Disclaimer:
 ### Problem 1
 
 **MSE**: 7.125940794232773e-34
-
-	`np.sin(x[0])`
-
+    ```python
+	np.sin(x[0])
+     ```
 ### Problem 2
 
 **MSE**: 527338181722.6093
